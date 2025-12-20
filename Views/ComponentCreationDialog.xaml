@@ -1,0 +1,145 @@
+﻿<Window
+    x:Class="SampleApp.Views.ComponentCreationDialog"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:resources="clr-namespace:SampleApp.Resources"
+    xmlns:viewModels="clr-namespace:SampleApp.ViewModels"
+    Title="Create Component"
+    Width="240"
+    Height="170"
+    d:DataContext="{d:DesignInstance viewModels:ComponentCreationViewModel}"
+    WindowStartupLocation="CenterOwner"
+    WindowStyle="ToolWindow"
+    mc:Ignorable="d">
+
+    <Window.Resources>
+        <ResourceDictionary>
+            <ResourceDictionary.MergedDictionaries>
+                <ResourceDictionary Source="/Resources/CommonPartsDictionary.xaml" />
+            </ResourceDictionary.MergedDictionaries>
+
+            <BooleanToVisibilityConverter x:Key="BoolToVisibilityConverter" />
+        </ResourceDictionary>
+    </Window.Resources>
+
+    <Grid Margin="2,2,2,2">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="*" />
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="Auto" />
+        </Grid.RowDefinitions>
+        <Grid>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="Auto" />
+                <ColumnDefinition Width="*" />
+            </Grid.ColumnDefinitions>
+
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="Auto" />
+            </Grid.RowDefinitions>
+
+            <TextBlock
+                Grid.Row="0"
+                Grid.Column="0"
+                Margin="0,0,4,2"
+                HorizontalAlignment="Right"
+                VerticalAlignment="Center"
+                Text="{x:Static resources:StringResources.ComponentCreationDialog_NameHeader}" />
+
+            <TextBox
+                Grid.Row="0"
+                Grid.Column="1"
+                Height="20"
+                Margin="0,0,2,2"
+                VerticalContentAlignment="Center"
+                Text="{Binding Name.Value, UpdateSourceTrigger=PropertyChanged}" />
+
+
+            <TextBlock
+                Grid.Row="1"
+                Grid.Column="0"
+                Margin="0,0,4,4"
+                HorizontalAlignment="Right"
+                VerticalAlignment="Center"
+                Text="{x:Static resources:StringResources.ComponentCreationDialog_DescriptionHeader}" />
+
+
+            <TextBox
+                Grid.Row="1"
+                Grid.Column="1"
+                Height="20"
+                Margin="0,0,2,4"
+                VerticalContentAlignment="Center"
+                Text="{Binding Description.Value, UpdateSourceTrigger=PropertyChanged}" />
+
+
+            <TextBlock
+                Grid.Row="2"
+                Grid.Column="0"
+                Margin="0,0,4,2"
+                HorizontalAlignment="Right"
+                VerticalAlignment="Center"
+                Text="{x:Static resources:StringResources.ComponentCreationDialog_TypeHeader}" />
+
+            <ComboBox
+                Grid.Row="2"
+                Grid.Column="1"
+                Height="24"
+                Margin="0,0,2,2"
+                VerticalContentAlignment="Center"
+                ItemsSource="{Binding Types}"
+                SelectedValue="{Binding SelectedType.Value}" />
+
+            <TextBlock
+                Grid.Row="3"
+                Grid.Column="0"
+                Margin="0,0,4,4"
+                HorizontalAlignment="Right"
+                VerticalAlignment="Center"
+                Text="{x:Static resources:StringResources.ComponentCreationDialog_ValueHeader}" />
+
+
+            <TextBox
+                Grid.Row="3"
+                Grid.Column="1"
+                Height="20"
+                Margin="0,0,2,4"
+                VerticalContentAlignment="Center"
+                Text="{Binding ValueText.Value, UpdateSourceTrigger=PropertyChanged}" />
+        </Grid>
+
+        <Separator Grid.Row="1" />
+
+        <StackPanel
+            Grid.Row="2"
+            Margin="0,2,0,2"
+            HorizontalAlignment="Right"
+            VerticalAlignment="Bottom"
+            Orientation="Horizontal">
+
+            <ContentControl
+                Margin="0,0,4,0"
+                Template="{StaticResource WarningIcon}"
+                ToolTip="{Binding WarningToolTip.Value}"
+                Visibility="{Binding IsWarningVisible.Value, Converter={StaticResource BoolToVisibilityConverter}}" />
+
+            <Button
+                Width="50"
+                Click="OkButton_OnClick"
+                Content="OK"
+                IsDefault="True"
+                IsEnabled="{Binding CanCreateComponent.Value}" />
+            <Button
+                Width="50"
+                Margin="4,0,4,0"
+                Click="CancelButton_OnClick"
+                Content="Cancel"
+                IsCancel="True" />
+        </StackPanel>
+    </Grid>
+</Window>

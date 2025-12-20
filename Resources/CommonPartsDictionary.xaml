@@ -1,0 +1,65 @@
+﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation" xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+
+    <ControlTemplate x:Key="WarningIcon">
+        <Canvas Width="17" Height="17">
+            <Path Data="M9,2 L17,16 0,16Z" Fill="#FFC107" />
+            <Path
+                HorizontalAlignment="Center"
+                Data="M8,7 10,7 10,11 8,11z"
+                Fill="#000000" />
+            <Path
+                HorizontalAlignment="Center"
+                Data="M8,12 L10,12 10,14 8,14z"
+                Fill="#000000" />
+        </Canvas>
+    </ControlTemplate>
+
+    <ControlTemplate x:Key="FunnelIcon">
+        <Canvas Width="15" Height="15">
+            <Path
+                HorizontalAlignment="Center"
+                Data="M8,8 L2,2 15,2 9,8 9,15 8,15z"
+                Fill="#000000" />
+        </Canvas>
+    </ControlTemplate>
+
+
+    <ControlTemplate x:Key="ResetButtonTemplate" TargetType="{x:Type Button}">
+        <Viewbox>
+            <Grid Width="24" Height="24">
+                <Ellipse Fill="Transparent" />
+                <Ellipse Stroke="{TemplateBinding Foreground}" StrokeThickness="2" />
+                <Line
+                    Stroke="{TemplateBinding Foreground}"
+                    StrokeThickness="2"
+                    X1="4"
+                    X2="20"
+                    Y1="4"
+                    Y2="20" />
+                <Line
+                    Stroke="{TemplateBinding Foreground}"
+                    StrokeThickness="2"
+                    X1="20"
+                    X2="4"
+                    Y1="4"
+                    Y2="20" />
+            </Grid>
+        </Viewbox>
+    </ControlTemplate>
+
+    <Style x:Key="ResetButtonStyle" TargetType="{x:Type Button}">
+        <Setter Property="Foreground" Value="#575A61" />
+        <Setter Property="Template" Value="{StaticResource ResetButtonTemplate}" />
+
+        <Style.Triggers>
+            <Trigger Property="IsMouseOver" Value="True">
+                <Setter Property="Foreground" Value="#2D2F32" />
+            </Trigger>
+            <Trigger Property="IsPressed" Value="True">
+                <Setter Property="Foreground" Value="#1D1D1F" />
+            </Trigger>
+        </Style.Triggers>
+    </Style>
+
+
+</ResourceDictionary>
